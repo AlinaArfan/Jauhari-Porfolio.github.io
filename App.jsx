@@ -135,8 +135,8 @@
               <header id="about" className="relative pt-32 pb-20 md:pt-48 md:pb-0 z-10 min-h-screen flex items-center overflow-hidden">
                 <div className="container mx-auto px-6 h-full flex items-center relative z-20">
                   
-                  {/* Left Content */}
-                  <div className="space-y-8 animate-fade-in-up max-w-2xl">
+                  {/* Left Content - Shifted Up for better positioning */}
+                  <div className="space-y-6 md:space-y-8 animate-fade-in-up max-w-2xl md:-mt-24">
                     <div className="space-y-2">
                       <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none">
                         JAUHARI <br />
