@@ -19,7 +19,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        /* Define custom font family and ensure Inter is default */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            /* Set background color here to ensure no flash of white */
+            background-color: #0a0a0a;
+        }
         .font-handwriting { font-family: 'Caveat', cursive; }
         
         /* Custom Animation Utilities */
@@ -29,6 +34,11 @@
         }
         .animate-fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
+        }
+        /* Custom style for the logo image */
+        .header-logo-img {
+            height: 32px; /* Set a specific height */
+            width: auto;
         }
     </style>
     
@@ -46,7 +56,7 @@
         }
     </script>
 </head>
-<body class="bg-neutral-950 text-white">
+<body class="text-white">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -59,7 +69,7 @@
             </svg>
         );
 
-        const Download = (props) => <Icon {...props}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></Icon>;
+        const Download = (props) => <Icon {...props}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-3-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></Icon>;
         const Instagram = (props) => <Icon {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></Icon>;
         const Twitter = (props) => <Icon {...props}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-12.7 14.6-2.6-2.1-3-5.7-1.7-8.8-4.5 3.6-10.2 3.6-10.2 3.6 1-3.6 4.9-6.3 8.9-6.3-1 0-1.7-1.2-1.7-2.3 0-1 .5-1.5 1-2"/></Icon>;
         const Linkedin = (props) => <Icon {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></Icon>;
@@ -86,6 +96,11 @@
 
           const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+          // URL logo placeholder (digunakan di `<div className="text-3xl font-bold...")`)
+          const logoSrc = "https://placehold.co/100x32/FFCC00/000000?text=LOGO"; 
+          // Link WhatsApp
+          const whatsappLink = "https://wa.me/6289662361727"; // Nomor: +62 896 6236 1727
+
           return (
             <div className="min-h-screen bg-neutral-950 text-white font-sans selection:bg-yellow-400 selection:text-black overflow-x-hidden">
               
@@ -99,23 +114,26 @@
               {/* Navigation */}
               <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-neutral-900/90 backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
                 <div className="container mx-auto px-6 flex justify-between items-center">
-                  {/* Logo */}
-                  <div className="text-3xl font-bold text-yellow-400 font-handwriting italic tracking-wider cursor-pointer">
-                    JS.
-                  </div>
-
-                  {/* Desktop Menu */}
+                  
+                  {/* DIPERBAIKI: Pindahkan menu desktop ke kiri, ganti posisi logo */}
+                  {/* Desktop Menu (Sekarang di Kiri) */}
                   <div className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-gray-300">
                     <a href="#about" className="hover:text-yellow-400 transition-colors">About Me</a>
                     <a href="#experience" className="hover:text-yellow-400 transition-colors">Experience</a>
                     <a href="#skills" className="hover:text-yellow-400 transition-colors">Skills</a>
                     <a href="#contact" className="hover:text-yellow-400 transition-colors">Contact</a>
                   </div>
-
-                  {/* Mobile Menu Button */}
+                  
+                  {/* Tombol Menu Mobile (Tetap di Kanan) */}
                   <button className="md:hidden text-white" onClick={toggleMenu}>
                     {isMenuOpen ? <XIcon size={28} /> : <MenuIcon size={28} />}
                   </button>
+                  
+                  {/* Tambahkan elemen spacer kosong jika menu desktop ditampilkan dan menu mobile disembunyikan
+                      untuk menjaga elemen menu mobile di kanan tetap di kanan (kecuali pada mobile). */}
+                  <div className="hidden md:block">
+                    {/* Placeholder kosong untuk menyeimbangkan layout di desktop */}
+                  </div>
                 </div>
 
                 {/* Mobile Menu Dropdown */}
@@ -132,11 +150,11 @@
               </nav>
 
               {/* Hero Section */}
-              <header id="about" className="relative pt-32 pb-20 md:pt-48 md:pb-0 z-10 min-h-screen flex items-center overflow-hidden">
+              <header id="about" className="relative pt-24 pb-10 md:pt-36 md:pb-0 z-10 min-h-screen flex items-center overflow-hidden">
                 <div className="container mx-auto px-6 h-full flex items-center relative z-20">
                   
                   {/* Left Content - Shifted Up for better positioning */}
-                  <div className="space-y-6 md:space-y-8 animate-fade-in-up max-w-2xl md:-mt-24">
+                  <div className="space-y-6 md:space-y-8 animate-fade-in-up max-w-2xl md:-mt-32">
                     <div className="space-y-2">
                       <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none">
                         JAUHARI <br />
@@ -157,14 +175,28 @@
                       </p>
                     </div>
 
+                    {/* Button Group */}
                     <div className="flex flex-wrap gap-4">
-                      <button className="px-8 py-3 bg-transparent border-2 border-gray-600 rounded-full text-white font-semibold hover:border-yellow-400 hover:text-yellow-400 transition-all flex items-center gap-2 group">
+                      {/* Tautan Download Portfolio (sudah ada) */}
+                      <a 
+                        href="https://drive.google.com/file/d/1bhW8ifC1w4XYgYZFcobK9-TpLFD7kVne/view?usp=sharing" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-8 py-3 bg-transparent border-2 border-gray-600 rounded-full text-white font-semibold hover:border-yellow-400 hover:text-yellow-400 transition-all flex items-center gap-2 group"
+                      >
                         Download Portfolio
                         <Download size={18} className="group-hover:translate-y-1 transition-transform" />
-                      </button>
-                      <button className="px-8 py-3 bg-yellow-400 text-black rounded-full font-bold hover:bg-yellow-300 transition-all shadow-[0_0_15px_rgba(250,204,21,0.3)]">
+                      </a>
+                      
+                      {/* DIPERBAIKI: Mengganti button menjadi tag a dengan link WhatsApp */}
+                      <a
+                        href={whatsappLink}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="px-8 py-3 bg-yellow-400 text-black rounded-full font-bold hover:bg-yellow-300 transition-all shadow-[0_0_15px_rgba(250,204,21,0.3)]"
+                      >
                         Hire Me Now
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -180,12 +212,13 @@
                         <img 
                           src="https://drive.google.com/thumbnail?id=1DAEbtXmAe6JaBPt83HnYEHcKyRZ_oho8&sz=w1000" 
                           alt="Jauhari Sagalih" 
-                          className="object-cover h-[150vh] md:h-[130vh] w-auto grayscale hover:grayscale-0 transition-all duration-500 drop-shadow-2xl"
+                          className="object-cover h-[100vh] md:h-[110vh] w-auto grayscale hover:grayscale-0 transition-all duration-500 drop-shadow-2xl"
                           style={{ 
                             maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
                             WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
                           }}
                           onError={(e) => {
+                            // Fallback to a reliable image URL if the GDrive link fails
                             e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"; 
                           }}
                         />
@@ -304,6 +337,7 @@
                         <SkillBar name="Adobe Illustrator" percent="90%" />
                         <SkillBar name="Adobe InDesign" percent="85%" />
                         <SkillBar name="Adobe Premiere & After Effects" percent="75%" />
+                        {/* DIPERBAIKI: Mengubah nama tag yang salah menjadi panggilan komponen SkillBar yang benar */}
                         <SkillBar name="Adobe XD (UI/UX)" percent="80%" />
                       </div>
                     </div>
@@ -352,7 +386,7 @@
                         </div>
                         +62 896 6236 1727
                     </a>
-                    <a href="https://www.linkedin.com/in/j-s-b5721173/" target="_blank" className="flex items-center gap-3 text-gray-400 hover:text-yellow-400 transition-colors">
+                    <a href="https://www.linkedin.com/in/j-s-b5721173/" target="_blank" className="flex items-center gap-3 text-gray-400 hover:text-yellow-400 transition-colors" rel="noopener noreferrer">
                         <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center">
                             <Linkedin size={18} />
                         </div>
